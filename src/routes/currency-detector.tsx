@@ -4,6 +4,7 @@ import { Banknote, Upload, Loader2, FileText, ShieldCheck, ShieldAlert } from "l
 import { toast } from "sonner";
 import { analyzeCurrency, type CurrencyAnalysis } from "@/lib/ai-services";
 import { saveHistory } from "@/lib/history";
+import { openLoginDialog } from "@/lib/auth";
 import { generateReportPDF } from "@/lib/report";
 import { PageHeader } from "@/components/page-bits";
 
@@ -11,13 +12,13 @@ export const Route = createFileRoute("/currency-detector")({
   head: () => ({
     meta: [
       { title: "Fake Currency Detector — Detectra AI" },
-      { name: "description", content: "Verify ₹100, ₹200, ₹500 and ₹2000 notes against RBI security features." },
+      { name: "description", content: "Verify ₹10, ₹20, ₹50, ₹100, ₹200 and ₹500 notes against RBI security features." },
     ],
   }),
   component: CurrencyDetector,
 });
 
-const DENOMS = ["₹100", "₹200", "₹500", "₹2000"] as const;
+const DENOMS = ["₹10", "₹20", "₹50", "₹100", "₹200", "₹500"] as const;
 
 function CurrencyDetector() {
   const [preview, setPreview] = useState<string | null>(null);
@@ -40,8 +41,13 @@ function CurrencyDetector() {
     try {
       const r = await analyzeCurrency(file, denom);
       setResult(r);
-      saveHistory({ type: "currency", input: `${denom} (${file.name})`, result: r });
-      toast.success("Currency analyzed");
+      const saved = saveHistory({ type: "currency", input: `${denom} (${file.name})`, result: r });
+      if (saved) {
+        toast.success("Currency analyzed & saved to history");
+      } else {
+        toast.success("Currency analyzed");
+        setTimeout(() => openLoginDialog({ reason: "Sign in to save this analysis to your history and access it from any device." }), 600);
+      }
     } catch {
       toast.error("Analysis failed");
     } finally {
@@ -74,7 +80,7 @@ function CurrencyDetector() {
         <div className="space-y-4">
           <div className="glass rounded-xl p-5">
             <label className="text-sm font-semibold mb-2 block">Denomination</label>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
               {DENOMS.map((d) => (
                 <button key={d} onClick={() => setDenom(d)}
                   className={`py-2.5 rounded-lg text-sm font-bold border transition-all ${

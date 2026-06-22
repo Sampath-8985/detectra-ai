@@ -4,6 +4,7 @@ import { ScanText, AlertTriangle, CheckCircle2, FileText, Loader2, History, Tras
 import { toast } from "sonner";
 import { analyzeScamText, type ScamAnalysis } from "@/lib/ai-services";
 import { saveHistory, loadHistory, clearHistory, type HistoryItem } from "@/lib/history";
+import { openLoginDialog } from "@/lib/auth";
 import { generateReportPDF } from "@/lib/report";
 import { PageHeader, RiskMeter, SeverityBadge } from "@/components/page-bits";
 import { useEffect } from "react";
@@ -47,8 +48,13 @@ function ScamAnalyzer() {
     try {
       const r = await analyzeScamText(text);
       setResult(r);
-      saveHistory({ type: "scam", input: text, result: r });
-      toast.success("Analysis complete");
+      const saved = saveHistory({ type: "scam", input: text, result: r });
+      if (saved) {
+        toast.success("Analysis complete · saved to history");
+      } else {
+        toast.success("Analysis complete");
+        setTimeout(() => openLoginDialog({ reason: "Sign in to save this analysis to your history and access it from any device." }), 600);
+      }
     } catch (e) {
       toast.error("Analysis failed. Please try again.");
     } finally {

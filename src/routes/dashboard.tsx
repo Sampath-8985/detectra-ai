@@ -58,10 +58,12 @@ const RISK = [
 ];
 
 const COUNTERFEIT = [
+  { d: "₹10", auth: 18200, fake: 90 },
+  { d: "₹20", auth: 15400, fake: 130 },
+  { d: "₹50", auth: 14100, fake: 210 },
   { d: "₹100", auth: 12400, fake: 320 },
   { d: "₹200", auth: 9200, fake: 240 },
   { d: "₹500", auth: 8900, fake: 540 },
-  { d: "₹2000", auth: 1100, fake: 410 },
 ];
 
 const PIE_COLORS = ["#a78bfa", "#60a5fa", "#34d399", "#fbbf24", "#f472b6", "#fb7185", "#22d3ee"];
