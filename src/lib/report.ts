@@ -119,7 +119,7 @@ export function generateReportPDF(data: ReportInput) {
   doc.line(40, y, W - 40, y);
   doc.setFontSize(9);
   doc.setTextColor(120, 120, 140);
-  doc.text("Detectra AI — Detect. Analyze. Protect.   |   ET AI Hackathon 2026", 40, y + 15);
+  doc.text("Detectra AI — Detect. Analyze. Protect.   |   Digital Public Safety Platform", 40, y + 15);
 
   doc.save(`detectra-report-${Date.now()}.pdf`);
 }
