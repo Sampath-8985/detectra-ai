@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ScreenshotScannerRouteImport } from './routes/screenshot-scanner'
 import { Route as ScamAnalyzerRouteImport } from './routes/scam-analyzer'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CurrencyDetectorRouteImport } from './routes/currency-detector'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -22,6 +23,11 @@ const ScreenshotScannerRoute = ScreenshotScannerRouteImport.update({
 const ScamAnalyzerRoute = ScamAnalyzerRouteImport.update({
   id: '/scam-analyzer',
   path: '/scam-analyzer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CurrencyDetectorRoute = CurrencyDetectorRouteImport.update({
@@ -38,12 +44,14 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/currency-detector': typeof CurrencyDetectorRoute
+  '/dashboard': typeof DashboardRoute
   '/scam-analyzer': typeof ScamAnalyzerRoute
   '/screenshot-scanner': typeof ScreenshotScannerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/currency-detector': typeof CurrencyDetectorRoute
+  '/dashboard': typeof DashboardRoute
   '/scam-analyzer': typeof ScamAnalyzerRoute
   '/screenshot-scanner': typeof ScreenshotScannerRoute
 }
@@ -51,6 +59,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/currency-detector': typeof CurrencyDetectorRoute
+  '/dashboard': typeof DashboardRoute
   '/scam-analyzer': typeof ScamAnalyzerRoute
   '/screenshot-scanner': typeof ScreenshotScannerRoute
 }
@@ -59,14 +68,21 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/currency-detector'
+    | '/dashboard'
     | '/scam-analyzer'
     | '/screenshot-scanner'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/currency-detector' | '/scam-analyzer' | '/screenshot-scanner'
+  to:
+    | '/'
+    | '/currency-detector'
+    | '/dashboard'
+    | '/scam-analyzer'
+    | '/screenshot-scanner'
   id:
     | '__root__'
     | '/'
     | '/currency-detector'
+    | '/dashboard'
     | '/scam-analyzer'
     | '/screenshot-scanner'
   fileRoutesById: FileRoutesById
@@ -74,6 +90,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CurrencyDetectorRoute: typeof CurrencyDetectorRoute
+  DashboardRoute: typeof DashboardRoute
   ScamAnalyzerRoute: typeof ScamAnalyzerRoute
   ScreenshotScannerRoute: typeof ScreenshotScannerRoute
 }
@@ -92,6 +109,13 @@ declare module '@tanstack/react-router' {
       path: '/scam-analyzer'
       fullPath: '/scam-analyzer'
       preLoaderRoute: typeof ScamAnalyzerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/currency-detector': {
@@ -114,6 +138,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CurrencyDetectorRoute: CurrencyDetectorRoute,
+  DashboardRoute: DashboardRoute,
   ScamAnalyzerRoute: ScamAnalyzerRoute,
   ScreenshotScannerRoute: ScreenshotScannerRoute,
 }
