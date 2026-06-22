@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ScreenshotScannerRouteImport } from './routes/screenshot-scanner'
 import { Route as ScamAnalyzerRouteImport } from './routes/scam-analyzer'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ScreenshotScannerRoute = ScreenshotScannerRouteImport.update({
+  id: '/screenshot-scanner',
+  path: '/screenshot-scanner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ScamAnalyzerRoute = ScamAnalyzerRouteImport.update({
   id: '/scam-analyzer',
   path: '/scam-analyzer',
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/scam-analyzer': typeof ScamAnalyzerRoute
+  '/screenshot-scanner': typeof ScreenshotScannerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/scam-analyzer': typeof ScamAnalyzerRoute
+  '/screenshot-scanner': typeof ScreenshotScannerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/scam-analyzer': typeof ScamAnalyzerRoute
+  '/screenshot-scanner': typeof ScreenshotScannerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/scam-analyzer'
+  fullPaths: '/' | '/scam-analyzer' | '/screenshot-scanner'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/scam-analyzer'
-  id: '__root__' | '/' | '/scam-analyzer'
+  to: '/' | '/scam-analyzer' | '/screenshot-scanner'
+  id: '__root__' | '/' | '/scam-analyzer' | '/screenshot-scanner'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ScamAnalyzerRoute: typeof ScamAnalyzerRoute
+  ScreenshotScannerRoute: typeof ScreenshotScannerRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/screenshot-scanner': {
+      id: '/screenshot-scanner'
+      path: '/screenshot-scanner'
+      fullPath: '/screenshot-scanner'
+      preLoaderRoute: typeof ScreenshotScannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/scam-analyzer': {
       id: '/scam-analyzer'
       path: '/scam-analyzer'
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ScamAnalyzerRoute: ScamAnalyzerRoute,
+  ScreenshotScannerRoute: ScreenshotScannerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
