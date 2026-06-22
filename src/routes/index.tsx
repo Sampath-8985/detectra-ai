@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  Shield, ScanText, Image as ImageIcon, Banknote, BarChart3, FileText,
+  ScanText, Image as ImageIcon, Banknote, BarChart3, FileText,
   Siren, ArrowRight, Sparkles, Lock, Eye, Zap,
 } from "lucide-react";
+import logoUrl from "@/assets/logo.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,7 +24,7 @@ const STATS = [
 const FEATURES = [
   { to: "/scam-analyzer", icon: ScanText, title: "Scam Detection", desc: "Analyze SMS, WhatsApp, email and Telegram messages instantly." },
   { to: "/screenshot-scanner", icon: ImageIcon, title: "Screenshot Scanner", desc: "Upload screenshots — OCR + AI extract and assess fraud signals." },
-  { to: "/currency-detector", icon: Banknote, title: "Fake Currency Detection", desc: "Verify ₹100, ₹200, ₹500 & ₹2000 notes against RBI security features." },
+  { to: "/currency-detector", icon: Banknote, title: "Fake Currency Detection", desc: "Verify ₹10, ₹20, ₹50, ₹100, ₹200 and ₹500 notes against RBI security features." },
   { to: "/dashboard", icon: BarChart3, title: "Fraud Dashboard", desc: "National intelligence dashboard with live trends and breakdowns." },
   { to: "/report", icon: FileText, title: "AI Report Generator", desc: "Download forensic PDF reports for filing with authorities." },
   { to: "/cyber-crime", icon: Siren, title: "Cyber Crime Reporting", desc: "One-tap reporting to 1930 and cybercrime.gov.in portal." },
@@ -39,7 +40,7 @@ function Home() {
         <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-28 sm:pt-28 sm:pb-32">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs font-medium">
             <Sparkles className="w-3.5 h-3.5 text-primary" />
-            ET AI Hackathon 2026 · Digital Public Safety
+            Digital Public Safety · Powered by AI
           </div>
           <h1 className="mt-6 text-5xl sm:text-7xl font-bold tracking-tight leading-[1.05]"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
@@ -68,10 +69,10 @@ function Home() {
             </Link>
           </div>
 
-          {/* Floating shield */}
-          <div className="hidden lg:block absolute right-12 top-24 animate-float">
-            <div className="w-64 h-64 rounded-3xl glass-strong flex items-center justify-center animate-pulse-glow">
-              <Shield className="w-32 h-32 text-primary" strokeWidth={1.2} />
+          {/* Floating logo */}
+          <div className="hidden lg:block absolute right-12 top-16 animate-float">
+            <div className="w-72 h-72 rounded-3xl glass-strong flex items-center justify-center animate-pulse-glow p-6">
+              <img src={logoUrl} alt="Detectra AI" className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(60,120,255,0.5)]" />
             </div>
           </div>
         </div>
