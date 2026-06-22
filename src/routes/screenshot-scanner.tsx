@@ -4,6 +4,7 @@ import { Image as ImageIcon, Upload, Loader2, FileText, AlertTriangle, CheckCirc
 import { toast } from "sonner";
 import { analyzeScreenshot, type ScreenshotAnalysis } from "@/lib/ai-services";
 import { saveHistory } from "@/lib/history";
+import { openLoginDialog } from "@/lib/auth";
 import { generateReportPDF } from "@/lib/report";
 import { PageHeader, RiskMeter, SeverityBadge } from "@/components/page-bits";
 
@@ -39,8 +40,13 @@ function ScreenshotScanner() {
     try {
       const r = await analyzeScreenshot(file);
       setResult(r);
-      saveHistory({ type: "screenshot", input: file.name, result: r });
-      toast.success("Screenshot analyzed");
+      const saved = saveHistory({ type: "screenshot", input: file.name, result: r });
+      if (saved) {
+        toast.success("Screenshot analyzed · saved to history");
+      } else {
+        toast.success("Screenshot analyzed");
+        setTimeout(() => openLoginDialog({ reason: "Sign in to save this analysis to your history and access it from any device." }), 600);
+      }
     } catch {
       toast.error("Analysis failed");
     } finally {
