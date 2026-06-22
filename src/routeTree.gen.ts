@@ -14,6 +14,7 @@ import { Route as ScamAnalyzerRouteImport } from './routes/scam-analyzer'
 import { Route as ReportRouteImport } from './routes/report'
 import { Route as HeatmapRouteImport } from './routes/heatmap'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CyberCrimeRouteImport } from './routes/cyber-crime'
 import { Route as CurrencyDetectorRouteImport } from './routes/currency-detector'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -42,6 +43,11 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CyberCrimeRoute = CyberCrimeRouteImport.update({
+  id: '/cyber-crime',
+  path: '/cyber-crime',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CurrencyDetectorRoute = CurrencyDetectorRouteImport.update({
   id: '/currency-detector',
   path: '/currency-detector',
@@ -56,6 +62,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/currency-detector': typeof CurrencyDetectorRoute
+  '/cyber-crime': typeof CyberCrimeRoute
   '/dashboard': typeof DashboardRoute
   '/heatmap': typeof HeatmapRoute
   '/report': typeof ReportRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/currency-detector': typeof CurrencyDetectorRoute
+  '/cyber-crime': typeof CyberCrimeRoute
   '/dashboard': typeof DashboardRoute
   '/heatmap': typeof HeatmapRoute
   '/report': typeof ReportRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/currency-detector': typeof CurrencyDetectorRoute
+  '/cyber-crime': typeof CyberCrimeRoute
   '/dashboard': typeof DashboardRoute
   '/heatmap': typeof HeatmapRoute
   '/report': typeof ReportRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/currency-detector'
+    | '/cyber-crime'
     | '/dashboard'
     | '/heatmap'
     | '/report'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/currency-detector'
+    | '/cyber-crime'
     | '/dashboard'
     | '/heatmap'
     | '/report'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/currency-detector'
+    | '/cyber-crime'
     | '/dashboard'
     | '/heatmap'
     | '/report'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CurrencyDetectorRoute: typeof CurrencyDetectorRoute
+  CyberCrimeRoute: typeof CyberCrimeRoute
   DashboardRoute: typeof DashboardRoute
   HeatmapRoute: typeof HeatmapRoute
   ReportRoute: typeof ReportRoute
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cyber-crime': {
+      id: '/cyber-crime'
+      path: '/cyber-crime'
+      fullPath: '/cyber-crime'
+      preLoaderRoute: typeof CyberCrimeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/currency-detector': {
       id: '/currency-detector'
       path: '/currency-detector'
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CurrencyDetectorRoute: CurrencyDetectorRoute,
+  CyberCrimeRoute: CyberCrimeRoute,
   DashboardRoute: DashboardRoute,
   HeatmapRoute: HeatmapRoute,
   ReportRoute: ReportRoute,
