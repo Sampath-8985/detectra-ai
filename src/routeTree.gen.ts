@@ -9,8 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ScreenshotScannerRouteImport } from './routes/screenshot-scanner'
+import { Route as ScamAnalyzerRouteImport } from './routes/scam-analyzer'
+import { Route as ReportRouteImport } from './routes/report'
+import { Route as HeatmapRouteImport } from './routes/heatmap'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CyberCrimeRouteImport } from './routes/cyber-crime'
+import { Route as CurrencyDetectorRouteImport } from './routes/currency-detector'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ScreenshotScannerRoute = ScreenshotScannerRouteImport.update({
+  id: '/screenshot-scanner',
+  path: '/screenshot-scanner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScamAnalyzerRoute = ScamAnalyzerRouteImport.update({
+  id: '/scam-analyzer',
+  path: '/scam-analyzer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportRoute = ReportRouteImport.update({
+  id: '/report',
+  path: '/report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeatmapRoute = HeatmapRouteImport.update({
+  id: '/heatmap',
+  path: '/heatmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CyberCrimeRoute = CyberCrimeRouteImport.update({
+  id: '/cyber-crime',
+  path: '/cyber-crime',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CurrencyDetectorRoute = CurrencyDetectorRouteImport.update({
+  id: '/currency-detector',
+  path: '/currency-detector',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +61,130 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/currency-detector': typeof CurrencyDetectorRoute
+  '/cyber-crime': typeof CyberCrimeRoute
+  '/dashboard': typeof DashboardRoute
+  '/heatmap': typeof HeatmapRoute
+  '/report': typeof ReportRoute
+  '/scam-analyzer': typeof ScamAnalyzerRoute
+  '/screenshot-scanner': typeof ScreenshotScannerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/currency-detector': typeof CurrencyDetectorRoute
+  '/cyber-crime': typeof CyberCrimeRoute
+  '/dashboard': typeof DashboardRoute
+  '/heatmap': typeof HeatmapRoute
+  '/report': typeof ReportRoute
+  '/scam-analyzer': typeof ScamAnalyzerRoute
+  '/screenshot-scanner': typeof ScreenshotScannerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/currency-detector': typeof CurrencyDetectorRoute
+  '/cyber-crime': typeof CyberCrimeRoute
+  '/dashboard': typeof DashboardRoute
+  '/heatmap': typeof HeatmapRoute
+  '/report': typeof ReportRoute
+  '/scam-analyzer': typeof ScamAnalyzerRoute
+  '/screenshot-scanner': typeof ScreenshotScannerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/currency-detector'
+    | '/cyber-crime'
+    | '/dashboard'
+    | '/heatmap'
+    | '/report'
+    | '/scam-analyzer'
+    | '/screenshot-scanner'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/currency-detector'
+    | '/cyber-crime'
+    | '/dashboard'
+    | '/heatmap'
+    | '/report'
+    | '/scam-analyzer'
+    | '/screenshot-scanner'
+  id:
+    | '__root__'
+    | '/'
+    | '/currency-detector'
+    | '/cyber-crime'
+    | '/dashboard'
+    | '/heatmap'
+    | '/report'
+    | '/scam-analyzer'
+    | '/screenshot-scanner'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CurrencyDetectorRoute: typeof CurrencyDetectorRoute
+  CyberCrimeRoute: typeof CyberCrimeRoute
+  DashboardRoute: typeof DashboardRoute
+  HeatmapRoute: typeof HeatmapRoute
+  ReportRoute: typeof ReportRoute
+  ScamAnalyzerRoute: typeof ScamAnalyzerRoute
+  ScreenshotScannerRoute: typeof ScreenshotScannerRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/screenshot-scanner': {
+      id: '/screenshot-scanner'
+      path: '/screenshot-scanner'
+      fullPath: '/screenshot-scanner'
+      preLoaderRoute: typeof ScreenshotScannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scam-analyzer': {
+      id: '/scam-analyzer'
+      path: '/scam-analyzer'
+      fullPath: '/scam-analyzer'
+      preLoaderRoute: typeof ScamAnalyzerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report': {
+      id: '/report'
+      path: '/report'
+      fullPath: '/report'
+      preLoaderRoute: typeof ReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/heatmap': {
+      id: '/heatmap'
+      path: '/heatmap'
+      fullPath: '/heatmap'
+      preLoaderRoute: typeof HeatmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cyber-crime': {
+      id: '/cyber-crime'
+      path: '/cyber-crime'
+      fullPath: '/cyber-crime'
+      preLoaderRoute: typeof CyberCrimeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/currency-detector': {
+      id: '/currency-detector'
+      path: '/currency-detector'
+      fullPath: '/currency-detector'
+      preLoaderRoute: typeof CurrencyDetectorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +197,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CurrencyDetectorRoute: CurrencyDetectorRoute,
+  CyberCrimeRoute: CyberCrimeRoute,
+  DashboardRoute: DashboardRoute,
+  HeatmapRoute: HeatmapRoute,
+  ReportRoute: ReportRoute,
+  ScamAnalyzerRoute: ScamAnalyzerRoute,
+  ScreenshotScannerRoute: ScreenshotScannerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
