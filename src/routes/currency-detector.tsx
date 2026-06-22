@@ -14,7 +14,7 @@ export const Route = createFileRoute("/currency-detector")({
       { name: "description", content: "Verify ₹100, ₹200, ₹500 and ₹2000 notes against RBI security features." },
     ],
   }),
-  component: CurrencyDetector;
+  component: CurrencyDetector,
 });
 
 const DENOMS = ["₹100", "₹200", "₹500", "₹2000"] as const;
