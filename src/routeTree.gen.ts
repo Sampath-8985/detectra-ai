@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ScreenshotScannerRouteImport } from './routes/screenshot-scanner'
 import { Route as ScamAnalyzerRouteImport } from './routes/scam-analyzer'
+import { Route as ReportRouteImport } from './routes/report'
 import { Route as HeatmapRouteImport } from './routes/heatmap'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CurrencyDetectorRouteImport } from './routes/currency-detector'
@@ -24,6 +25,11 @@ const ScreenshotScannerRoute = ScreenshotScannerRouteImport.update({
 const ScamAnalyzerRoute = ScamAnalyzerRouteImport.update({
   id: '/scam-analyzer',
   path: '/scam-analyzer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportRoute = ReportRouteImport.update({
+  id: '/report',
+  path: '/report',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HeatmapRoute = HeatmapRouteImport.update({
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/currency-detector': typeof CurrencyDetectorRoute
   '/dashboard': typeof DashboardRoute
   '/heatmap': typeof HeatmapRoute
+  '/report': typeof ReportRoute
   '/scam-analyzer': typeof ScamAnalyzerRoute
   '/screenshot-scanner': typeof ScreenshotScannerRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/currency-detector': typeof CurrencyDetectorRoute
   '/dashboard': typeof DashboardRoute
   '/heatmap': typeof HeatmapRoute
+  '/report': typeof ReportRoute
   '/scam-analyzer': typeof ScamAnalyzerRoute
   '/screenshot-scanner': typeof ScreenshotScannerRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/currency-detector': typeof CurrencyDetectorRoute
   '/dashboard': typeof DashboardRoute
   '/heatmap': typeof HeatmapRoute
+  '/report': typeof ReportRoute
   '/scam-analyzer': typeof ScamAnalyzerRoute
   '/screenshot-scanner': typeof ScreenshotScannerRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/currency-detector'
     | '/dashboard'
     | '/heatmap'
+    | '/report'
     | '/scam-analyzer'
     | '/screenshot-scanner'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/currency-detector'
     | '/dashboard'
     | '/heatmap'
+    | '/report'
     | '/scam-analyzer'
     | '/screenshot-scanner'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/currency-detector'
     | '/dashboard'
     | '/heatmap'
+    | '/report'
     | '/scam-analyzer'
     | '/screenshot-scanner'
   fileRoutesById: FileRoutesById
@@ -104,6 +116,7 @@ export interface RootRouteChildren {
   CurrencyDetectorRoute: typeof CurrencyDetectorRoute
   DashboardRoute: typeof DashboardRoute
   HeatmapRoute: typeof HeatmapRoute
+  ReportRoute: typeof ReportRoute
   ScamAnalyzerRoute: typeof ScamAnalyzerRoute
   ScreenshotScannerRoute: typeof ScreenshotScannerRoute
 }
@@ -122,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/scam-analyzer'
       fullPath: '/scam-analyzer'
       preLoaderRoute: typeof ScamAnalyzerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report': {
+      id: '/report'
+      path: '/report'
+      fullPath: '/report'
+      preLoaderRoute: typeof ReportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/heatmap': {
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   CurrencyDetectorRoute: CurrencyDetectorRoute,
   DashboardRoute: DashboardRoute,
   HeatmapRoute: HeatmapRoute,
+  ReportRoute: ReportRoute,
   ScamAnalyzerRoute: ScamAnalyzerRoute,
   ScreenshotScannerRoute: ScreenshotScannerRoute,
 }
